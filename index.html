@@ -1,0 +1,2012 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cachotecnohogar | Energía, Tecnología y Hogar Inteligente con IA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crema: '#FBFBEE',
+                        'crema-dark': '#F5F5DC',
+                        'azul-marino': '#001f3f',
+                        'azul-deep': '#001428',
+                        'rojo-oscuro': '#8B0000',
+                        'rojo-brillante': '#B22222',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B0000;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #001f3f;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(178, 34, 34, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(178, 34, 34, 0.3); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        /* Ocultar barra de scroll para elementos específicos */
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#fcfcf9] text-slate-800 antialiased font-sans min-h-screen flex flex-col pb-20 md:pb-0">
+
+<script>
+    // Listado ampliado y mejorado de productos de Cachotecnohogar
+    const productsDB = [
+        {
+            id: 'skymax-600',
+            name: 'Panel Solar SKYMAX 600-630W',
+            category: 'energia',
+            desc: 'Panel solar monocristalino de altísima eficiencia y tecnología N-Type. Ideal para sistemas de respaldo residencial y comercial.',
+            price: 180,
+            bulkPrice: 'Pallet de 37U: 165 USD c/u',
+            hasBulk: true,
+            features: ['Tecnología Bifacial / N-Type', 'Garantía de rendimiento', 'Excelente en días nublados'],
+            image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+            badge: 'Más Vendido'
+        },
+        {
+            id: 'ecoflow-delta-pro',
+            name: 'EcoFlow Delta Pro 3600Wh',
+            category: 'energia',
+            desc: 'Estación de energía portátil de élite. Capacidad masiva expandible, salida de 3600W AC pura para alimentar todo tu hogar.',
+            price: 2170,
+            bulkPrice: 'Envío gratis a domicilio en La Habana',
+            hasBulk: true,
+            features: ['Batería LFP (6000+ ciclos)', 'Carga ultra rápida X-Stream', 'Control inteligente vía App'],
+            image: 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=600&q=80',
+            badge: 'Premium'
+        },
+        {
+            id: 'inversor-deye-5k',
+            name: 'Inversor Híbrido Deye 5kW LPV',
+            category: 'energia',
+            desc: 'Inversor de onda senoidal pura de última generación con cargador solar MPPT inteligente incorporado.',
+            price: 1250,
+            bulkPrice: 'Garantía técnica de 1 año',
+            hasBulk: true,
+            features: ['Eficiencia del 97.6%', 'Pantalla táctil LCD color', 'Soporta inyección cero'],
+            image: 'https://images.unsplash.com/photo-1548613053-220efc56865d?auto=format&fit=crop&w=600&q=80',
+            badge: 'Recomendado'
+        },
+        {
+            id: 'rx580-gpu',
+            name: 'GPU AMD Radeon RX 580 8GB (2048SP)',
+            category: 'pc',
+            desc: 'Tarjeta gráfica con excelente equilibrio rendimiento-precio. Ideal para gaming en 1080p, diseño gráfico y edición multimedia.',
+            price: 115,
+            bulkPrice: 'Consulte disponibilidad de marcas',
+            hasBulk: false,
+            features: ['8GB GDDR5 memoria', 'Puertos HDMI y DisplayPort', 'Sistema de enfriamiento dual-fan'],
+            image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=600&q=80',
+            badge: 'Calidad/Precio'
+        },
+        {
+            id: 'ssd-kingston-1tb',
+            name: 'SSD M.2 NVMe Kingston NV2 1TB',
+            category: 'pc',
+            desc: 'Unidad de estado sólido ultrarrápida que mejora el rendimiento global de cualquier laptop o PC de escritorio.',
+            price: 65,
+            bulkPrice: 'Instalación básica disponible',
+            hasBulk: false,
+            features: ['Lectura hasta 3500MB/s', 'Interfaz PCIe 4.0 x4', 'Factor de forma compacto M.2 2280'],
+            image: 'https://images.unsplash.com/photo-1562976540-150adc1991f1?auto=format&fit=crop&w=600&q=80',
+            badge: 'Nuevo'
+        },
+        {
+            id: 'ram-corsair-16gb',
+            name: 'RAM Corsair Vengeance LPX 16GB DDR4',
+            category: 'pc',
+            desc: 'Memoria optimizada para las plataformas DDR4 más recientes con disipador térmico de aluminio puro.',
+            price: 48,
+            bulkPrice: 'Kit de 2x8GB a 3200MHz',
+            hasBulk: false,
+            features: ['Frecuencia ultra estable', 'Disipador de perfil bajo', 'Soporte para Intel XMP 2.0'],
+            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80',
+            badge: 'Popular'
+        },
+        {
+            id: 'split-royal-12',
+            name: 'Split Inverter Royal 12,000 BTU',
+            category: 'hogar',
+            desc: 'Aire acondicionado de alta eficiencia para un enfriamiento óptimo consumiendo hasta un 60% menos de energía.',
+            price: 430,
+            bulkPrice: 'Entrega rápida en La Habana',
+            hasBulk: false,
+            features: ['Tecnología Inverter inteligente', 'Gas ecológico R410A', 'Filtro purificador de aire'],
+            image: 'https://images.unsplash.com/photo-1621905252507-b354bc25edac?auto=format&fit=crop&w=600&q=80',
+            badge: 'Ahorrador'
+        },
+        {
+            id: 'induccion-doble',
+            name: 'Cocina de Inducción Doble Royal',
+            category: 'hogar',
+            desc: 'Superficie de vitrocerámica pulida con controles táctiles independientes. Cocción ultra rápida y segura.',
+            price: 110,
+            bulkPrice: 'Garantía de fabricante incluida',
+            hasBulk: false,
+            features: ['2 quemadores de alto poder', 'Temporizador integrado', 'Fácil de limpiar y operar'],
+            image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80',
+            badge: 'Económico'
+        },
+        {
+            id: 'calentador-ocean-50l',
+            name: 'Calentador Eléctrico Ocean 50L',
+            category: 'hogar',
+            desc: 'Termo de agua vertical con aislamiento térmico de alta densidad. Agua caliente garantizada para todo tu hogar.',
+            price: 175,
+            bulkPrice: 'Kit de montaje incluido',
+            hasBulk: false,
+            features: ['Capacidad de 50 Litros', 'Interior esmaltado anticorrosión', 'Termostato de seguridad dual'],
+            image: 'https://images.unsplash.com/photo-1585338114002-959550411186?auto=format&fit=crop&w=600&q=80',
+            badge: 'Confort'
+        }
+    ];
+
+    // Variables de Estado de la Aplicación
+    let cart = [];
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let selectedCurrency = 'USD'; // Moneda de visualización activa
+    let usdToCupRate = 350;       // Tasa de cambio configurable por el usuario en Cuba
+    let usdToMlcRate = 1.0;       // Tasa MLC por defecto
+    let activeMainTab = 'catalogo'; // catalogo, solar-calc, pc-builder
+</script>
+
+<header class="bg-azul-marino text-white sticky top-0 z-40 shadow-xl transition-all duration-300">
+    <!-- Banner de Información Superior -->
+    <div class="bg-rojo-oscuro text-white text-xs py-2 px-4 text-center font-medium flex justify-between items-center max-w-7xl mx-auto">
+        <span class="flex items-center gap-1">
+            <i class="fa-solid fa-truck-fast"></i> Entregas garantizadas en La Habana y provincias cercanas
+        </span>
+        <span class="hidden md:inline-flex items-center gap-1">
+            <i class="fa-solid fa-shield-halved"></i> Equipos certificados con garantía técnica de fábrica
+        </span>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo / Nombre de Marca -->
+            <a href="#" onclick="switchMainTab('catalogo')" class="flex items-center gap-3 group">
+                <div class="bg-gradient-to-br from-rojo-oscuro to-rojo-brillante p-2.5 rounded-xl shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-bolt-lightning text-xl text-crema"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tight block text-white">Cacho<span class="text-rojo-brillante">tecnohogar</span></span>
+                    <span class="text-[10px] text-slate-300 tracking-wider uppercase block font-bold">Energía, Tecnología & IA</span>
+                </div>
+            </a>
+
+            <!-- Controles del Navbar -->
+            <div class="flex items-center gap-4">
+                <!-- Selector de Moneda Rápido -->
+                <div class="hidden sm:flex bg-azul-deep border border-slate-700 rounded-lg p-1 items-center">
+                    <button onclick="setCurrency('USD')" id="btn-usd" class="px-3 py-1 text-xs rounded-md font-bold bg-rojo-oscuro text-white transition-colors">
+                        USD
+                    </button>
+                    <button onclick="setCurrency('CUP')" id="btn-cup" class="px-3 py-1 text-xs rounded-md font-bold text-slate-300 hover:text-white transition-colors">
+                        CUP
+                    </button>
+                </div>
+
+                <!-- Botón Configurador de Cambios -->
+                <button onclick="toggleExchangeModal()" class="text-slate-300 hover:text-white p-2 rounded-lg bg-azul-deep border border-slate-700 hover:border-slate-500 transition-all flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-calculator text-rojo-brillante"></i> 
+                    <span class="hidden md:inline">Tasa: 1 USD = <span id="current-rate-lbl">350</span> CUP</span>
+                </button>
+
+                <!-- Carrito de Compras (Trigger) -->
+                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-rojo-oscuro to-rojo-brillante hover:from-rojo-brillante hover:to-rojo-oscuro p-3 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-white text-lg"></i>
+                    <span class="hidden sm:inline font-bold text-sm text-white">Mi Carrito</span>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-white text-azul-marino text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                        0
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="relative bg-gradient-to-b from-azul-marino to-azul-deep text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <!-- Círculos de Fondo SVG Decorativos -->
+    <div class="absolute inset-0 opacity-10">
+        <svg class="absolute top-0 right-0 w-96 h-96 -mr-20 -mt-20 text-white" fill="currentColor" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" />
+        </svg>
+        <svg class="absolute bottom-0 left-0 w-80 h-80 -ml-20 -mb-20 text-white" fill="currentColor" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" />
+        </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Texto del Hero -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-slate-800/60 border border-slate-700/80 px-4 py-1.5 rounded-full text-sm font-semibold text-crema-dark">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                Ventas activas en La Habana con entrega a casa
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                La tecnología e ingeniería solar <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-500 to-amber-300">más inteligente</span> en Cuba.
+            </h1>
+            <p class="text-slate-300 text-lg sm:text-xl font-light max-w-2xl mx-auto lg:mx-0">
+                Usa nuestras nuevas herramientas de cálculo impulsadas por Inteligencia Artificial para dimensionar tu sistema solar ideal o verificar si los componentes de PC son compatibles antes de comprar.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a href="#main-tabs" onclick="switchMainTab('catalogo')" class="bg-gradient-to-r from-rojo-oscuro to-rojo-brillante hover:from-rojo-brillante hover:to-rojo-oscuro text-white px-6 py-3.5 rounded-xl text-center font-bold text-base shadow-lg hover:shadow-red-950/50 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-store"></i> Ver Catálogo
+                </a>
+                <a href="#main-tabs" onclick="switchMainTab('solar-calc')" class="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white px-6 py-3.5 rounded-xl text-center font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-solar-panel"></i> Calculadora Solar IA
+                </a>
+                <a href="#main-tabs" onclick="switchMainTab('pc-builder')" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 px-6 py-3.5 rounded-xl text-center font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-microchip"></i> Armador PC IA
+                </a>
+            </div>
+        </div>
+
+        <!-- Banner Promocional / Destacado -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 to-azul-deep border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+            <div class="absolute -top-3 -right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">
+                Oferta Especial
+            </div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-circle-dollar-to-slot text-amber-400"></i> Kit EcoFlow Delta Pro
+            </h3>
+            <p class="text-slate-400 text-sm mb-6">
+                El mejor aliado contra apagones. Generador portátil para todo tu hogar más envío express gratuito por La Habana.
+            </p>
+            <div class="flex items-baseline gap-2 mb-6">
+                <span class="text-4xl font-black text-white" id="promo-price-lbl">2,170 USD</span>
+                <span class="text-slate-500 line-through text-sm">2,350 USD</span>
+            </div>
+            <button onclick="quickAdd('ecoflow-delta-pro')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-bold transition-all shadow-md shadow-emerald-950/50 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-cart-plus"></i> Añadir esta Oferta al Carrito
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Tab Navigation Bar -->
+<div id="main-tabs" class="bg-white border-b border-slate-200 sticky top-20 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-around sm:justify-start sm:gap-8 overflow-x-auto">
+            <button onclick="switchMainTab('catalogo')" id="tab-btn-catalogo" class="py-4 px-2 font-bold text-sm border-b-2 border-rojo-oscuro text-rojo-oscuro transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-box-open"></i> 1. Catálogo Completo
+            </button>
+            <button onclick="switchMainTab('solar-calc')" id="tab-btn-solar-calc" class="py-4 px-2 font-bold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-calculator text-emerald-600"></i> 2. Calculadora Solar IA
+            </button>
+            <button onclick="switchMainTab('pc-builder')" id="tab-btn-pc-builder" class="py-4 px-2 font-bold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-microchip text-blue-600"></i> 3. Analizador de PC IA
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="flex-grow">
+    <!-- SECCIÓN 1: CATÁLOGO COMPLETO -->
+    <section id="section-catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Título y Control de Filtros -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-black text-azul-marino">Catálogo de Productos</h2>
+                <p class="text-slate-500 mt-1">Busca y filtra tu equipamiento. Añádelo al carrito para ordenar directo por WhatsApp.</p>
+            </div>
+            
+            <!-- Buscador -->
+            <div class="relative w-full md:w-80">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="search-input" onkeyup="handleSearch(event)" placeholder="¿Qué estás buscando?..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rojo-oscuro focus:border-transparent shadow-sm text-sm">
+            </div>
+        </div>
+
+        <!-- Menú de Categorías (Pills) -->
+        <div class="flex flex-wrap justify-center md:justify-start gap-2.5 mb-8">
+            <button onclick="setCategory('all')" id="cat-all" class="category-btn bg-rojo-oscuro text-white px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-list-ul"></i> Todos
+            </button>
+            <button onclick="setCategory('energia')" id="cat-energia" class="category-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 hover:bg-slate-50">
+                <i class="fa-solid fa-solar-panel"></i> Energía Solar
+            </button>
+            <button onclick="setCategory('pc')" id="cat-pc" class="category-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 hover:bg-slate-50">
+                <i class="fa-solid fa-computer"></i> Partes de PC
+            </button>
+            <button onclick="setCategory('hogar')" id="cat-hogar" class="category-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 hover:bg-slate-50">
+                <i class="fa-solid fa-house-laptop"></i> Hogar / Electrodomésticos
+            </button>
+        </div>
+
+        <!-- Grilla de Productos Dinámica -->
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- RENDERIZADO DESDE JAVASCRIPT -->
+        </div>
+
+        <!-- Mensaje si no hay productos -->
+        <div id="no-products-msg" class="hidden text-center py-12">
+            <div class="bg-slate-100 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-ban text-3xl text-slate-400"></i>
+            </div>
+            <p class="text-slate-600 font-medium">No se encontraron productos con la búsqueda solicitada.</p>
+            <button onclick="resetFilters()" class="text-rojo-oscuro font-bold underline mt-2 hover:text-rojo-brillante">Ver todos los productos</button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: CALCULADORA SOLAR CON IA -->
+    <section id="section-solar-calc" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-gradient-to-r from-teal-50 to-emerald-50 border border-emerald-100 rounded-3xl p-6 sm:p-8 mb-8">
+            <div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-teal-900 flex items-center gap-2">
+                        <i class="fa-solid fa-solar-panel text-emerald-600"></i> Calculadora Solar Inteligente IA
+                    </h2>
+                    <p class="text-slate-600 text-sm mt-1 max-w-2xl">
+                        ¿Qué equipos quieres encender en casa durante un apagón en Cuba? Configura tu carga eléctrica real y deja que nuestra Inteligencia Artificial diseñe tu sistema solar personalizado en segundos.
+                    </p>
+                </div>
+                <div class="bg-white border border-emerald-100 shadow-sm px-4 py-3 rounded-2xl flex items-center gap-2 text-xs font-bold text-teal-800">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    API Gemini 3.1 Flash
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Formulario de Configuración -->
+            <div class="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-6">
+                <h3 class="font-extrabold text-lg text-slate-800 border-b pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-teal-600"></i> Carga de Electrodomésticos
+                </h3>
+
+                <!-- Split AC Slider -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold text-slate-700">
+                        <span>❄️ Aire Split (12,000 BTU)</span>
+                        <span id="sc-split-val" class="text-teal-600">No usar</span>
+                    </div>
+                    <input type="range" id="sc-split-hours" min="0" max="12" value="0" step="1" oninput="updateSolarFormLabels()" class="w-full accent-teal-600 bg-slate-100 rounded-lg appearance-none h-2">
+                    <div class="flex justify-between text-[10px] text-slate-400">
+                        <span>Apagado</span>
+                        <span>6 horas</span>
+                        <span>12 horas</span>
+                    </div>
+                </div>
+
+                <!-- Refrigerador Switch -->
+                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg">🔌</span>
+                        <div>
+                            <p class="text-xs font-bold text-slate-700">Refrigerador (Continuo)</p>
+                            <p class="text-[10px] text-slate-400">Esencial para conservar alimentos</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" id="sc-fridge" checked class="w-5 h-5 accent-emerald-600">
+                </div>
+
+                <!-- Ventilador Slider -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold text-slate-700">
+                        <span>💨 Ventiladores (80W c/u)</span>
+                        <span id="sc-fan-val" class="text-teal-600">0 unidades</span>
+                    </div>
+                    <input type="range" id="sc-fan" min="0" max="6" value="2" step="1" oninput="updateSolarFormLabels()" class="w-full accent-teal-600 bg-slate-100 rounded-lg appearance-none h-2">
+                    <div class="flex justify-between text-[10px] text-slate-400">
+                        <span>Ninguno</span>
+                        <span>3 unidades</span>
+                        <span>6 unidades</span>
+                    </div>
+                </div>
+
+                <!-- TV Slider -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold text-slate-700">
+                        <span>📺 Televisión LED (120W)</span>
+                        <span id="sc-tv-val" class="text-teal-600">0 horas</span>
+                    </div>
+                    <input type="range" id="sc-tv" min="0" max="8" value="3" step="1" oninput="updateSolarFormLabels()" class="w-full accent-teal-600 bg-slate-100 rounded-lg appearance-none h-2">
+                    <div class="flex justify-between text-[10px] text-slate-400">
+                        <span>Apagado</span>
+                        <span>4 horas</span>
+                        <span>8 horas</span>
+                    </div>
+                </div>
+
+                <!-- Bombillos Slider -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold text-slate-700">
+                        <span>💡 Luces / Bombillos LED (15W c/u)</span>
+                        <span id="sc-lights-val" class="text-teal-600">4 unidades</span>
+                    </div>
+                    <input type="range" id="sc-lights" min="0" max="15" value="6" step="1" oninput="updateSolarFormLabels()" class="w-full accent-teal-600 bg-slate-100 rounded-lg appearance-none h-2">
+                    <div class="flex justify-between text-[10px] text-slate-400">
+                        <span>Ninguno</span>
+                        <span>8 unidades</span>
+                        <span>15 unidades</span>
+                    </div>
+                </div>
+
+                <button onclick="calculateSolarSystemIA()" class="w-full bg-teal-600 hover:bg-teal-500 text-white py-4 rounded-2xl font-bold shadow-md hover:shadow-teal-900/30 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-brain"></i> Diseñar Sistema Solar con IA
+                </button>
+            </div>
+
+            <!-- Dashboard de Resultados -->
+            <div class="lg:col-span-7 space-y-6">
+                <div id="solar-results-placeholder" class="bg-white border-2 border-dashed border-slate-200 rounded-3xl p-12 text-center flex flex-col items-center justify-center h-full min-h-[400px]">
+                    <div class="bg-teal-50 text-teal-600 p-6 rounded-full mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles text-4xl"></i>
+                    </div>
+                    <h4 class="font-extrabold text-lg text-slate-700">Listo para Configurar</h4>
+                    <p class="text-slate-400 text-sm mt-1 max-w-sm mx-auto">Ajusta los deslizadores de consumo de la izquierda y haz clic en "Diseñar con IA". Gemini calculará tu sistema ideal de inmediato.</p>
+                </div>
+
+                <!-- Pantalla de Carga de la IA -->
+                <div id="solar-results-loading" class="hidden bg-white border border-slate-200 rounded-3xl p-12 text-center flex flex-col items-center justify-center h-full min-h-[400px]">
+                    <div class="relative w-24 h-24 mb-6">
+                        <div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-t-teal-600 animate-spin"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-teal-600 text-2xl">
+                            <i class="fa-solid fa-solar-panel animate-bounce"></i>
+                        </div>
+                    </div>
+                    <h4 class="font-extrabold text-lg text-slate-700 animate-pulse">Gemini Analizando Carga Eléctrica...</h4>
+                    <p class="text-slate-400 text-sm mt-2 max-w-sm mx-auto">Calculando Wh diarios, balance fotovoltaico, y mapeando inversores y baterías compatibles de nuestro catálogo...</p>
+                </div>
+
+                <!-- Tablero de Reporte Real de IA (Oculto Inicialmente) -->
+                <div id="solar-results-dashboard" class="hidden bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-6">
+                    <div class="flex items-center justify-between border-b pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase tracking-widest block">Reporte de Ingeniería IA</span>
+                            <h3 class="font-black text-xl text-slate-800">Cálculo de Sizing Solar</h3>
+                        </div>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-black px-3 py-1 rounded-full uppercase">Optimizado</span>
+                    </div>
+
+                    <!-- Widgets de Métricas de Sizing -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="bg-slate-50 border border-slate-100 p-3.5 rounded-2xl text-center">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1">Consumo Diario</span>
+                            <span id="sol-card-wh" class="text-lg font-black text-slate-800">0 Wh</span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-3.5 rounded-2xl text-center">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1">Capacidad Kwp</span>
+                            <span id="sol-card-kwp" class="text-lg font-black text-teal-600">0.0 kWp</span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-3.5 rounded-2xl text-center">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1">Paneles 600W</span>
+                            <span id="sol-card-panels" class="text-lg font-black text-slate-800">0 U</span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-3.5 rounded-2xl text-center">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block mb-1">Batería Min. Wh</span>
+                            <span id="sol-card-battery" class="text-lg font-black text-amber-600">0 Wh</span>
+                        </div>
+                    </div>
+
+                    <!-- Explicación Técnica de IA -->
+                    <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
+                        <h4 class="font-bold text-sm text-slate-800 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-circle-question text-teal-600"></i> Análisis de Autonomía de Gemini:
+                        </h4>
+                        <p id="sol-explanation-txt" class="text-xs text-slate-600 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Rutina Recomendada en Apagones -->
+                    <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl">
+                        <h4 class="font-bold text-sm text-amber-900 flex items-center gap-1.5 mb-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Planificación y Consejos de Uso:
+                        </h4>
+                        <p id="sol-routine-txt" class="text-xs text-amber-800 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Enlaces rápidos de compra sugeridos por la IA -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-sm text-slate-800 flex items-center gap-1.5">
+                            <i class="fa-solid fa-cart-shopping text-emerald-600"></i> Equipamiento recomendado de nuestra tienda:
+                        </h4>
+                        <div id="solar-recommended-products-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Inyectado desde JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: ARMADOR Y COMPATIBILIDAD DE PC CON IA -->
+    <section id="section-pc-builder" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl p-6 sm:p-8 mb-8">
+            <div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-blue-900 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-blue-600"></i> Analizador de Compatibilidad PC IA
+                    </h2>
+                    <p class="text-slate-600 text-sm mt-1 max-w-2xl">
+                        Combina componentes de nuestro catálogo técnico con los procesadores del mercado para analizar posibles cuellos de botella y compatibilidades físicas antes de realizar tu compra.
+                    </p>
+                </div>
+                <div class="bg-white border border-blue-100 shadow-sm px-4 py-3 rounded-2xl flex items-center gap-2 text-xs font-bold text-blue-800">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+                    Gemini 3.1 Flash Integrado
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Formulario de Configuración de Hardware -->
+            <div class="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-5">
+                <h3 class="font-extrabold text-lg text-slate-800 border-b pb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-wrench text-blue-600"></i> Especificar Componentes
+                </h3>
+
+                <!-- Tarjeta Gráfica (GPU) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">🎮 Tarjeta de Video (GPU)</label>
+                    <select id="pc-gpu" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="rx580">AMD Radeon RX 580 8GB (Del Catálogo)</option>
+                        <option value="gtx1660">NVIDIA GTX 1660 Super 6GB</option>
+                        <option value="rtx3060">NVIDIA RTX 3060 12GB</option>
+                        <option value="rtx4060">NVIDIA RTX 4060 8GB</option>
+                    </select>
+                </div>
+
+                <!-- Procesador (CPU) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">🧠 Procesador (CPU)</label>
+                    <select id="pc-cpu" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="i3-10100f">Intel Core i3-10100F (Básico / Económico)</option>
+                        <option value="i5-12400f">Intel Core i5-12400F (Excelente Rendimiento)</option>
+                        <option value="ryzen-5600x">AMD Ryzen 5 5600X (Muy Popular)</option>
+                        <option value="i7-12700k">Intel Core i7-12700K (Gama Alta)</option>
+                        <option value="custom">Otro procesador personalizado (especificar en chat)</option>
+                    </select>
+                </div>
+
+                <!-- Memoria RAM -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">⚡ Memoria RAM</label>
+                    <select id="pc-ram" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="corsair-16gb">16GB Corsair Vengeance DDR4 (Del Catálogo)</option>
+                        <option value="generic-8gb">8GB DDR4 (Uso General)</option>
+                        <option value="corsair-32gb">32GB Corsair Vengeance DDR4 (Multitarea Pesada)</option>
+                    </select>
+                </div>
+
+                <!-- Disco Almacenamiento -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">💽 Unidad de Almacenamiento</label>
+                    <select id="pc-ssd" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="kingston-1tb">SSD Kingston NV2 1TB NVMe (Del Catálogo)</option>
+                        <option value="generic-hdd">HDD 1TB Sata3 (Muy Lento)</option>
+                    </select>
+                </div>
+
+                <!-- Juegos Objetivo -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">🎯 Juegos o Aplicaciones a Testear</label>
+                    <input type="text" id="pc-games" value="Fortnite, GTA V, Valorant" placeholder="Ej: Cyberpunk 2077, AutoCAD, Premiere" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <button onclick="calculatePCCompatibilityIA()" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-2xl font-bold shadow-md hover:shadow-blue-900/30 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-gamepad"></i> Analizar Rendimiento con IA
+                </button>
+            </div>
+
+            <!-- Dashboard HUD de Resultados de PC -->
+            <div class="lg:col-span-7 space-y-6">
+                <div id="pc-results-placeholder" class="bg-white border-2 border-dashed border-slate-200 rounded-3xl p-12 text-center flex flex-col items-center justify-center h-full min-h-[400px]">
+                    <div class="bg-blue-50 text-blue-600 p-6 rounded-full mb-4">
+                        <i class="fa-solid fa-microchip text-4xl"></i>
+                    </div>
+                    <h4 class="font-extrabold text-lg text-slate-700">Listo para Ensamblar</h4>
+                    <p class="text-slate-400 text-sm mt-1 max-w-sm mx-auto">Elige los componentes de hardware que te gustaría probar a la izquierda y presiona "Analizar Rendimiento con IA".</p>
+                </div>
+
+                <!-- Pantalla de Carga de la IA PC -->
+                <div id="pc-results-loading" class="hidden bg-white border border-slate-200 rounded-3xl p-12 text-center flex flex-col items-center justify-center h-full min-h-[400px]">
+                    <div class="relative w-24 h-24 mb-6">
+                        <div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-t-blue-600 animate-spin"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-blue-600 text-2xl">
+                            <i class="fa-solid fa-gears animate-spin"></i>
+                        </div>
+                    </div>
+                    <h4 class="font-extrabold text-lg text-slate-700 animate-pulse">Sintonizando Banco de Pruebas...</h4>
+                    <p class="text-slate-400 text-sm mt-2 max-w-sm mx-auto">Calculando cuellos de botella mediante simulaciones sintéticas de CPU/GPU y verificando el catálogo de Cachotecnohogar...</p>
+                </div>
+
+                <!-- HUD Panel de Resultados de Hardware (Oculto Inicialmente) -->
+                <div id="pc-results-dashboard" class="hidden bg-slate-900 text-slate-100 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-blue-400 uppercase tracking-widest block">Simulador de Hardware v2.1</span>
+                            <h3 class="font-black text-xl text-white">Análisis de Desempeño IA</h3>
+                        </div>
+                        <span class="bg-blue-950 text-blue-300 border border-blue-900 text-xs font-bold px-3 py-1 rounded-full uppercase">Estable</span>
+                    </div>
+
+                    <!-- Métricas de Cuello de Botella -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-950 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full border-4 border-blue-600 flex items-center justify-center font-black text-lg text-blue-400">
+                                <span id="pc-hud-bottleneck-pct">0%</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-slate-400 uppercase">Cuello de Botella</h4>
+                                <p id="pc-hud-bottleneck-comp" class="text-sm font-extrabold text-white mt-0.5">Ninguno</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 border border-slate-800 p-4 rounded-2xl flex flex-col justify-center">
+                            <h4 class="font-bold text-xs text-slate-400 uppercase mb-1">Estatus de Compatibilidad</h4>
+                            <div id="pc-hud-compatibility-container" class="space-y-1">
+                                <!-- Inyectado desde JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grilla de Rendimiento en FPS -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs text-blue-400 uppercase tracking-wider">⚡ Rendimiento Estimado en Juegos (1080p):</h4>
+                        <div id="pc-hud-fps-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Inyectado desde JS -->
+                        </div>
+                    </div>
+
+                    <!-- Recomendaciones de Mejoras y Productos -->
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-2xl space-y-2">
+                        <h4 class="font-bold text-xs text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-up text-teal-400"></i> Sugerencias de Optimización de Gemini:
+                        </h4>
+                        <ul id="pc-hud-upgrades-list" class="space-y-1.5 text-xs text-slate-300 list-disc pl-4">
+                            <!-- Inyectado desde JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Veredicto Final del Armado -->
+                    <div class="bg-gradient-to-r from-blue-950 to-indigo-950 border border-blue-900 p-4 rounded-2xl text-xs leading-relaxed text-slate-200">
+                        <span class="font-extrabold text-blue-400 block mb-1">Veredicto del Ingeniero IA:</span>
+                        <p id="pc-hud-verdict-txt"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Beneficios Corporativos -->
+<section class="bg-crema border-y border-crema-dark py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Beneficio 1 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-amber-100 text-amber-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-solar-panel text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Especialistas en Energía</h4>
+                <p class="text-slate-600 text-sm">Paneles, baterías de litio y soluciones EcoFlow con asesoramiento profesional por IA y de ingenieros reales.</p>
+            </div>
+        </div>
+        <!-- Beneficio 2 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-red-100 text-red-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-microchip text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Hardware a tu Medida</h4>
+                <p class="text-slate-600 text-sm">Armado de PC personalizadas, memorias, discos rápidos y tarjetas gráficas con total garantía técnica.</p>
+            </div>
+        </div>
+        <!-- Beneficio 3 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-blue-100 text-blue-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-handshake text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Múltiples Formas de Pago</h4>
+                <p class="text-slate-600 text-sm">Facilidad absoluta: aceptamos USD, CUP (a tasa acordada), MLC, transferencias y Zelle.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CART DRAWER WIDGET -->
+<div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 overflow-hidden">
+        <!-- Overlay oscuro translúcido -->
+        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-900 bg-opacity-70 transition-opacity" aria-hidden="true"></div>
+        
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <div class="pointer-events-auto w-screen max-w-md">
+                <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-2xl">
+                    <!-- Cabecera del Carrito -->
+                    <div class="bg-azul-marino text-white py-6 px-4 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-bold flex items-center gap-2">
+                                <i class="fa-solid fa-cart-shopping text-rojo-brillante"></i> Tu Compra
+                            </h2>
+                            <button onclick="toggleCartDrawer()" class="text-slate-300 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition-colors">
+                                <i class="fa-solid fa-xmark text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contenido del Carrito -->
+                    <div class="flex-1 py-6 px-4 sm:px-6">
+                        <!-- Items del Carrito -->
+                        <div id="cart-items" class="space-y-6">
+                            <!-- Los items se agregan mediante JS -->
+                        </div>
+
+                        <!-- Estado de carrito vacío -->
+                        <div id="cart-empty-state" class="hidden text-center py-12 flex flex-col items-center justify-center h-full">
+                            <i class="fa-solid fa-cart-plus text-5xl text-slate-300 mb-4"></i>
+                            <p class="text-slate-600 font-semibold text-lg">Tu carrito está vacío</p>
+                            <p class="text-slate-400 text-sm mt-1 max-w-[250px] mx-auto">Explora el catálogo y añade los artículos que necesitas.</p>
+                            <button onclick="toggleCartDrawer()" class="mt-6 bg-rojo-oscuro text-white px-6 py-2.5 rounded-xl font-bold shadow-md hover:bg-rojo-brillante transition-colors text-sm">
+                                Seguir Comprando
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resumen y Checkout por WhatsApp -->
+                    <div id="cart-summary" class="border-t border-slate-200 py-6 px-4 sm:px-6 bg-slate-50">
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between text-sm text-slate-600">
+                                <span>Subtotal:</span>
+                                <span id="cart-subtotal-lbl">0.00 USD</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-slate-600">
+                                <span>Envío (La Habana):</span>
+                                <span class="text-emerald-600 font-bold">Por coordinar / Gratis en ofertas</span>
+                            </div>
+                            <div class="border-t border-slate-200 my-2"></div>
+                            <div class="flex justify-between text-lg font-black text-azul-marino">
+                                <span>Total General:</span>
+                                <div class="text-right">
+                                    <span id="cart-total-lbl" class="block">0.00 USD</span>
+                                    <span id="cart-total-alt-lbl" class="block text-xs text-slate-500 font-bold mt-1">~ 0.00 CUP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón WhatsApp Checkout -->
+                        <a href="#" id="whatsapp-checkout-btn" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 px-4 rounded-xl text-center font-bold text-lg shadow-lg hover:shadow-emerald-900/40 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Pedido a WhatsApp
+                        </a>
+                        <p class="text-center text-[11px] text-slate-400 mt-3">
+                            Se enviará el detalle de la compra para ultimar método de pago y envío.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="bg-slate-50 border-t border-slate-200 py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black text-azul-marino">Preguntas Frecuentes</h2>
+            <p class="text-slate-500 mt-2">Respuestas rápidas para agilizar tu compra e instalación.</p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                <button onclick="toggleFAQ(1)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
+                    <span>¿Cómo se realiza el pago y qué monedas aceptan?</span>
+                    <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-content-1" class="hidden px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                    Aceptamos diversas modalidades de pago para adaptarnos a tus necesidades: Efectivo en USD, CUP (calculado en base a la tasa vigente mostrada en la web), transferencias MLC y Zelle. El pago se efectúa típicamente contra entrega de forma rápida y segura.
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                <button onclick="toggleFAQ(2)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
+                    <span>¿Hacen entregas a domicilio y cuál es el costo?</span>
+                    <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-content-2" class="hidden px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                    Sí, entregamos a domicilio en todos los municipios de La Habana. Ofrecemos **envío gratuito** para determinados productos de alta gama (como el EcoFlow Delta Pro) y tarifas de mensajería sumamente económicas para otros componentes. Consúltanos directamente para envíos a provincias colindantes.
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                <button onclick="toggleFAQ(3)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
+                    <span>¿Qué tipo de garantía ofrecen en sus equipos?</span>
+                    <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-content-3" class="hidden px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                    Todos nuestros productos incluyen **garantía técnica de fábrica** que varía de 3 a 12 meses según el tipo de artículo. Cubrimos fallas de funcionamiento de fábrica, dándote total tranquilidad en inversiones grandes de energía solar o hardware de PC.
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                <button onclick="toggleFAQ(4)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
+                    <span>¿Ofrecen el servicio de instalación de paneles e inversores?</span>
+                    <i id="faq-icon-4" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-content-4" class="hidden px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                    Brindamos asesoría de instalación gratuita para todos nuestros clientes de sistemas solares. Además, contamos con ingenieros y electricistas colaboradores de confianza en La Habana que pueden encargarse del montaje e integración total de tus paneles, baterías e inversores.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal de Configuración de Tasas de Cambio -->
+<div id="exchange-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <!-- Backdrop -->
+    <div onclick="toggleExchangeModal()" class="absolute inset-0 bg-slate-900 bg-opacity-70"></div>
+    <!-- Modal Box -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative z-10 shadow-2xl border border-slate-100">
+        <button onclick="toggleExchangeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <div class="flex items-center gap-3 mb-6">
+            <div class="bg-red-100 text-rojo-oscuro p-3 rounded-2xl">
+                <i class="fa-solid fa-calculator text-2xl"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-azul-marino">Tasa de Cambio</h3>
+                <p class="text-slate-500 text-xs">Ajusta los valores para calcular precios en CUP de inmediato.</p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">1 USD equivale a:</label>
+                <div class="relative rounded-xl shadow-sm">
+                    <input type="number" id="cup-rate-input" value="350" min="1" class="w-full pl-4 pr-16 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-rojo-oscuro focus:border-transparent outline-none font-bold text-lg text-slate-800">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 font-bold">
+                        CUP
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Este valor actualizará todos los precios mostrados en CUP en la tienda.</p>
+            </div>
+
+            <button onclick="saveExchangeRates()" class="w-full bg-azul-marino hover:bg-azul-deep text-white py-3.5 rounded-xl font-bold transition-colors shadow-md shadow-slate-300">
+                Guardar y Aplicar Cambios
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- FLOATING WIDGET: Asistente de IA (Chatbox Colapsable con TTS) -->
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- Chat Window -->
+    <div id="ai-chat-window" class="hidden w-[92vw] sm:w-[400px] h-[580px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex-col overflow-hidden mb-4 transition-all duration-300">
+        <!-- Header del Chat -->
+        <div class="bg-gradient-to-r from-azul-marino to-azul-deep text-white p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-emerald-500 to-teal-400 p-2 rounded-xl text-white shadow-md">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-sm flex items-center gap-1.5">
+                        Asistente Solar & PC IA
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+                    </h4>
+                    <p class="text-[10px] text-slate-300">Equipado con Lector de Voz Gemini</p>
+                </div>
+            </div>
+            <button onclick="toggleAIChat()" class="text-slate-300 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Historial de Mensajes -->
+        <div id="ai-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50 scroll-smooth">
+            <!-- Mensaje de bienvenida inicial -->
+            <div class="flex gap-2 items-start max-w-[85%]">
+                <div class="bg-emerald-100 text-emerald-800 p-2 rounded-xl text-xs font-black">IA</div>
+                <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 text-xs text-slate-700 space-y-2">
+                    <p>👋 ¡Hola! Soy el asesor de **Cachotecnohogar**.</p>
+                    <p>Puedo ayudarte con:</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>**Calculadora Solar:** ¿Qué equipos quieres encender en un apagón?</li>
+                        <li>**Armado de PC:** Compatibilidad con RX 580, RAM y SSD.</li>
+                        <li>**Pagos y Envíos:** Costos y métodos de pago en La Habana.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sugerencias de Inicio Rápido -->
+        <div class="p-2 bg-white border-t border-slate-100 flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-none" id="quick-prompts-container">
+            <button onclick="sendQuickPrompt('💡 ¿Qué necesito para encender un Split de 12000 BTU en un apagón?')" class="bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 text-[11px] px-3 py-1.5 rounded-full font-semibold transition-colors flex-shrink-0 border border-slate-200">
+                💡 Calculadora Solar
+            </button>
+            <button onclick="sendQuickPrompt('🎮 ¿Qué PC me puedo armar con la RX 580 de su catálogo?')" class="bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 text-[11px] px-3 py-1.5 rounded-full font-semibold transition-colors flex-shrink-0 border border-slate-200">
+                🎮 Configurar PC
+            </button>
+            <button onclick="sendQuickPrompt('💳 ¿Qué formas de pago aceptan en Cuba?')" class="bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 text-[11px] px-3 py-1.5 rounded-full font-semibold transition-colors flex-shrink-0 border border-slate-200">
+                💳 Formas de pago
+            </button>
+        </div>
+
+        <!-- Input del Chat -->
+        <div class="p-3 bg-white border-t border-slate-150 flex gap-2 items-center">
+            <input type="text" id="ai-chat-input" onkeydown="handleAIChatKey(event)" placeholder="Pregunta sobre paneles, PC, envíos..." class="flex-grow bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+            <button onclick="sendAIChatMessage()" class="bg-emerald-600 hover:bg-emerald-500 text-white p-2.5 rounded-xl transition-all shadow-md active:scale-95">
+                <i class="fa-solid fa-paper-plane text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón Flotante Activador -->
+    <button onclick="toggleAIChat()" class="bg-gradient-to-r from-teal-600 via-emerald-600 to-emerald-500 text-white p-4 rounded-full shadow-2xl flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all animate-pulse-glow border-2 border-white">
+        <i class="fa-solid fa-brain text-xl"></i>
+        <span class="hidden sm:inline font-bold text-xs tracking-wide">Consultas & Sizing IA</span>
+    </button>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-azul-marino text-white pt-16 pb-8 border-t-8 border-rojo-oscuro">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <!-- Columna 1: Marca e Intro -->
+            <div class="md:col-span-2 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gradient-to-br from-rojo-oscuro to-rojo-brillante p-2.5 rounded-xl shadow-lg">
+                        <i class="fa-solid fa-bolt-lightning text-xl text-crema"></i>
+                    </div>
+                    <span class="text-2xl font-black tracking-tight text-white">Cacho<span class="text-rojo-brillante">tecnohogar</span></span>
+                </div>
+                <p class="text-slate-400 text-sm max-w-sm leading-relaxed">
+                    Suministramos soluciones integrales de energía solar, partes de computadora y tecnología doméstica eficiente en La Habana. Comprometidos con un servicio transparente, garantía real y atención posventa de primer nivel.
+                </p>
+                <!-- Redes / Contacto Rápido -->
+                <div class="flex gap-4 pt-2">
+                    <a href="https://wa.me/5355808574" target="_blank" class="w-10 h-10 bg-slate-800 hover:bg-emerald-600 rounded-xl flex items-center justify-center transition-colors text-white">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-colors text-white">
+                        <i class="fa-brands fa-facebook-f text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-pink-600 rounded-xl flex items-center justify-center transition-colors text-white">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna 2: Categorías -->
+            <div>
+                <h4 class="font-bold text-lg text-crema mb-4 border-l-4 border-rojo-brillante pl-3">Navegación</h4>
+                <ul class="space-y-2.5 text-sm text-slate-400">
+                    <li><a href="#" onclick="switchMainTab('catalogo')" class="hover:text-white transition-colors">Catálogo Técnico</a></li>
+                    <li><a href="#" onclick="switchMainTab('solar-calc')" class="hover:text-white transition-colors">Calculadora Solar IA</a></li>
+                    <li><a href="#" onclick="switchMainTab('pc-builder')" class="hover:text-white transition-colors">Armador PC IA</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Ubicación y Contacto -->
+            <div>
+                <h4 class="font-bold text-lg text-crema mb-4 border-l-4 border-rojo-brillante pl-3">Atención al Cliente</h4>
+                <ul class="space-y-3.5 text-sm text-slate-400">
+                    <li class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-location-dot text-rojo-brillante mt-1"></i>
+                        <span>Entregas directas a domicilio por toda La Habana, Cuba.</span>
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-phone text-rojo-brillante"></i>
+                        <span>+53 55808574</span>
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-envelope text-rojo-brillante"></i>
+                        <span>soporte@cachotecnohogar.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright y Créditos -->
+        <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+            <p>© 2026 Cachotecnohogar Cuba. Todos los derechos reservados.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:underline">Políticas de Garantía</a>
+                <a href="#" class="hover:underline">Términos de Envío</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Inicialización al cargar el documento
+    window.addEventListener('load', () => {
+        renderProducts();
+        updateCartUI();
+        initializeExchangeRates();
+        updateSolarFormLabels();
+    });
+
+    // Cargar tasas del almacenamiento local si existen
+    function initializeExchangeRates() {
+        const savedRate = localStorage.getItem('usdToCupRate');
+        if (savedRate) {
+            usdToCupRate = parseFloat(savedRate);
+            document.getElementById('cup-rate-input').value = usdToCupRate;
+            document.getElementById('current-rate-lbl').innerText = usdToCupRate;
+        }
+    }
+
+    // Cambiar de pestaña principal
+    function switchMainTab(tabId) {
+        activeMainTab = tabId;
+        const tabs = ['catalogo', 'solar-calc', 'pc-builder'];
+        
+        tabs.forEach(t => {
+            const btn = document.getElementById(`tab-btn-${t}`);
+            const sec = document.getElementById(`section-${t}`);
+            if (t === tabId) {
+                btn.className = "py-4 px-2 font-bold text-sm border-b-2 border-rojo-oscuro text-rojo-oscuro transition-all flex items-center gap-2 whitespace-nowrap";
+                sec.classList.remove('hidden');
+            } else {
+                btn.className = "py-4 px-2 font-bold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all flex items-center gap-2 whitespace-nowrap";
+                sec.classList.add('hidden');
+            }
+        });
+    }
+
+    // Cambiar la moneda activa para toda la interfaz
+    function setCurrency(currency) {
+        selectedCurrency = currency;
+        
+        // Actualizar estados visuales de los botones de moneda
+        const btnUsd = document.getElementById('btn-usd');
+        const btnCup = document.getElementById('btn-cup');
+
+        if (currency === 'USD') {
+            btnUsd.className = "px-3 py-1 text-xs rounded-md font-bold bg-rojo-oscuro text-white transition-colors";
+            btnCup.className = "px-3 py-1 text-xs rounded-md font-bold text-slate-300 hover:text-white transition-colors";
+        } else {
+            btnCup.className = "px-3 py-1 text-xs rounded-md font-bold bg-rojo-oscuro text-white transition-colors";
+            btnUsd.className = "px-3 py-1 text-xs rounded-md font-bold text-slate-300 hover:text-white transition-colors";
+        }
+
+        renderProducts();
+        updateCartUI();
+    }
+
+    // Modal de Tasa de Cambio
+    function toggleExchangeModal() {
+        const modal = document.getElementById('exchange-modal');
+        modal.classList.toggle('hidden');
+    }
+
+    function saveExchangeRates() {
+        const val = parseFloat(document.getElementById('cup-rate-input').value);
+        if (val && val > 0) {
+            usdToCupRate = val;
+            localStorage.setItem('usdToCupRate', usdToCupRate);
+            document.getElementById('current-rate-lbl').innerText = usdToCupRate;
+            toggleExchangeModal();
+            renderProducts();
+            updateCartUI();
+        }
+    }
+
+    // Filtros de categoría
+    function setCategory(category) {
+        currentCategory = category;
+        
+        // Actualizar clases de los botones de filtrado
+        const buttons = document.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+            btn.className = "category-btn bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 hover:bg-slate-50";
+        });
+        
+        const activeBtn = document.getElementById(`cat-${category}`);
+        if (activeBtn) {
+            activeBtn.className = "category-btn bg-rojo-oscuro text-white px-5 py-2 rounded-full font-bold text-xs shadow-sm transition-all flex items-center gap-1.5";
+        }
+
+        renderProducts();
+    }
+
+    // Control del buscador
+    function handleSearch(event) {
+        searchQuery = event.target.value.toLowerCase().trim();
+        renderProducts();
+    }
+
+    // Formatear precio de acuerdo a la divisa seleccionada
+    function formatPrice(usdPrice) {
+        if (selectedCurrency === 'USD') {
+            return `${usdPrice.toLocaleString('en-US')} USD`;
+        } else {
+            const converted = usdPrice * usdToCupRate;
+            return `${converted.toLocaleString('en-US')} CUP`;
+        }
+    }
+
+    // Renderizar listado de productos
+    function renderProducts() {
+        const grid = document.getElementById('products-grid');
+        const noMsg = document.getElementById('no-products-msg');
+        grid.innerHTML = '';
+
+        // Filtrar productos
+        const filtered = productsDB.filter(p => {
+            const matchesCategory = (currentCategory === 'all' || p.category === currentCategory);
+            const matchesSearch = p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+            return matchesCategory && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+            noMsg.classList.remove('hidden');
+            grid.classList.add('hidden');
+            return;
+        }
+
+        noMsg.classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        filtered.forEach(p => {
+            const card = document.createElement('div');
+            card.className = "bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col";
+            
+            // Características en forma de lista
+            const featuresHTML = p.features.map(f => `
+                <li class="flex items-center gap-1.5 text-xs text-slate-500">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i>
+                    <span>${f}</span>
+                </li>
+            `).join('');
+
+            // Construir precio alternativo en letras pequeñas
+            const alternativePriceText = selectedCurrency === 'USD' 
+                ? `~ ${(p.price * usdToCupRate).toLocaleString('en-US')} CUP` 
+                : `~ ${p.price.toLocaleString('en-US')} USD`;
+
+            card.innerHTML = `
+                <div class="relative overflow-hidden h-48 bg-slate-100">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/001f3f/FFFFFF?text=${encodeURIComponent(p.name)}'">
+                    <span class="absolute top-3 left-3 bg-azul-marino/95 text-crema text-[10px] uppercase font-extrabold px-3 py-1 rounded-full tracking-wider shadow-sm">
+                        ${p.badge}
+                    </span>
+                    <span class="absolute top-3 right-3 bg-slate-900/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                        ${p.category.toUpperCase()}
+                    </span>
+                </div>
+                
+                <div class="p-6 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-extrabold text-lg text-azul-marino leading-snug hover:text-rojo-brillante transition-colors">${p.name}</h3>
+                        <p class="text-slate-500 text-xs mt-2 line-clamp-3">${p.desc}</p>
+                        
+                        <!-- Características clave -->
+                        <ul class="mt-4 space-y-1.5 border-t border-slate-50 pt-3">
+                            ${featuresHTML}
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <span class="text-xs text-slate-400 font-bold">Precio unitario:</span>
+                            <span class="text-xs text-slate-500 font-medium">${alternativePriceText}</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="text-2xl font-black text-rojo-oscuro">${formatPrice(p.price)}</span>
+                            <button onclick="addToCart('${p.id}')" class="bg-azul-marino hover:bg-rojo-oscuro text-white p-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 font-bold text-xs">
+                                <i class="fa-solid fa-cart-plus text-sm"></i> Agregar
+                            </button>
+                        </div>
+                        ${p.hasBulk ? `<p class="text-[10px] text-slate-400 font-semibold mt-2 italic flex items-center gap-1"><i class="fa-solid fa-tags text-amber-500"></i> ${p.bulkPrice}</p>` : ''}
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Limpiar filtros de búsqueda
+    function resetFilters() {
+        document.getElementById('search-input').value = '';
+        searchQuery = '';
+        setCategory('all');
+    }
+
+    // Toggle para menú de FAQ Accordion
+    function toggleFAQ(id) {
+        const content = document.getElementById(`faq-content-${id}`);
+        const icon = document.getElementById(`faq-icon-${id}`);
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+    }
+
+    // --- SISTEMA DEL CARRITO DE COMPRAS ---
+
+    // Abrir y Cerrar Carrito
+    function toggleCartDrawer() {
+        const drawer = document.getElementById('cart-drawer');
+        drawer.classList.toggle('hidden');
+    }
+
+    // Añadir producto
+    function addToCart(id) {
+        const product = productsDB.find(p => p.id === id);
+        if (!product) return;
+
+        const existing = cart.find(item => item.product.id === id);
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({ product, qty: 1 });
+        }
+
+        updateCartUI();
+        
+        // Efecto visual rápido de notificación
+        const badge = document.getElementById('cart-badge');
+        badge.classList.remove('animate-bounce');
+        void badge.offsetWidth; // Recalcular layout para reiniciar animación
+        badge.classList.add('animate-bounce');
+    }
+
+    // Añadir rápido (desde el Hero, por ejemplo) y abrir carrito
+    function quickAdd(id) {
+        addToCart(id);
+        toggleCartDrawer();
+    }
+
+    // Cambiar cantidad de producto
+    function updateQty(id, delta) {
+        const item = cart.find(item => item.product.id === id);
+        if (!item) return;
+
+        item.qty += delta;
+        if (item.qty <= 0) {
+            cart = cart.filter(item => item.product.id !== id);
+        }
+
+        updateCartUI();
+    }
+
+    // Eliminar completamente
+    function removeItem(id) {
+        cart = cart.filter(item => item.product.id !== id);
+        updateCartUI();
+    }
+
+    // Actualizar interfaz del carrito, badge e importes
+    function updateCartUI() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyState = document.getElementById('cart-empty-state');
+        const summary = document.getElementById('cart-summary');
+        const badge = document.getElementById('cart-badge');
+
+        // Total de ítems
+        const totalItemsCount = cart.reduce((acc, item) => acc + item.qty, 0);
+        badge.innerText = totalItemsCount;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            summary.classList.add('opacity-50', 'pointer-events-none');
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+        summary.classList.remove('opacity-50', 'pointer-events-none');
+        cartItemsContainer.innerHTML = '';
+
+        let subtotalUSD = 0;
+
+        cart.forEach(item => {
+            const itemCost = item.product.price * item.qty;
+            subtotalUSD += itemCost;
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flex items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100";
+            itemDiv.innerHTML = `
+                <img src="${item.product.image}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded-xl" onerror="this.src='https://placehold.co/150x150/001f3f/FFFFFF?text=${encodeURIComponent(item.product.name)}'">
+                <div class="flex-grow">
+                    <h4 class="font-bold text-sm text-azul-marino line-clamp-1">${item.product.name}</h4>
+                    <p class="text-xs text-slate-400 mt-0.5">${formatPrice(item.product.price)} c/u</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <button onclick="updateQty('${item.product.id}', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-100 active:scale-95 transition-all text-xs font-bold text-slate-600">-</button>
+                        <span class="text-sm font-bold w-6 text-center">${item.qty}</span>
+                        <button onclick="updateQty('${item.product.id}', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-100 active:scale-95 transition-all text-xs font-bold text-slate-600">+</button>
+                    </div>
+                </div>
+                <div class="text-right flex flex-col items-end gap-2">
+                    <button onclick="removeItem('${item.product.id}')" class="text-slate-400 hover:text-red-500 transition-colors">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                    <span class="font-bold text-sm text-rojo-oscuro">${formatPrice(itemCost)}</span>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+
+        // Totales generales
+        document.getElementById('cart-subtotal-lbl').innerText = `${subtotalUSD.toLocaleString('en-US')} USD`;
+        
+        if (selectedCurrency === 'USD') {
+            document.getElementById('cart-total-lbl').innerText = `${subtotalUSD.toLocaleString('en-US')} USD`;
+            document.getElementById('cart-total-alt-lbl').innerText = `~ ${(subtotalUSD * usdToCupRate).toLocaleString('en-US')} CUP`;
+        } else {
+            const convertedTotal = subtotalUSD * usdToCupRate;
+            document.getElementById('cart-total-lbl').innerText = `${convertedTotal.toLocaleString('en-US')} CUP`;
+            document.getElementById('cart-total-alt-lbl').innerText = `~ ${subtotalUSD.toLocaleString('en-US')} USD`;
+        }
+
+        // Configurar enlace de salida a WhatsApp con el mensaje estructurado
+        buildWhatsAppLink(subtotalUSD);
+    }
+
+    // Estructurar mensaje pre-configurado de venta
+    function buildWhatsAppLink(totalUSD) {
+        const phone = "5355808574"; // Número de Cachotecnohogar sin símbolos
+        let message = `*NUEVO PEDIDO - CACHOTECNOHOGAR*\n`;
+        message += `===================================\n\n`;
+        
+        cart.forEach(item => {
+            const sub = item.product.price * item.qty;
+            message += `• *${item.product.name}*\n`;
+            message += `  Cant: ${item.qty} x ${item.product.price} USD = *${sub} USD*\n\n`;
+        });
+        
+        message += `===================================\n`;
+        message += `*Total Compra:* ${totalUSD} USD\n`;
+        message += `*Tasa acordada:* 1 USD = ${usdToCupRate} CUP\n`;
+        message += `*Equivalente en CUP:* ${(totalUSD * usdToCupRate).toLocaleString('en-US')} CUP\n\n`;
+        message += `_Hola, me interesa concretar este pedido de Cachotecnohogar. Por favor, confírmenme disponibilidad para acordar la entrega en La Habana._`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const btn = document.getElementById('whatsapp-checkout-btn');
+        btn.href = `https://wa.me/${phone}?text=${encodedMessage}`;
+    }
+</script>
+
+<script>
+    const apiKey = ""; // Dejar vacío para que Canvas inyecte dinámicamente el Key en runtime.
+    const apiUrlText = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+    const apiUrlTTS = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+
+    let aiChatHistory = [];
+
+    // Implementación de Fetch con Backoff Exponencial
+    async function fetchWithBackoff(url, options, retries = 3, delay = 1000) {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                if (response.status === 429 && retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response;
+        } catch (error) {
+            if (retries > 0) {
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithBackoff(url, options, retries - 1, delay * 2);
+            }
+            throw error;
+        }
+    }
+
+    // Alternar visibilidad del widget de chat
+    function toggleAIChat() {
+        const windowEl = document.getElementById('ai-chat-window');
+        windowEl.classList.toggle('hidden');
+        windowEl.classList.toggle('flex');
+    }
+
+    // Abrir chat directamente enviando un prompt pre-configurado
+    function openAIChat(promptText) {
+        const windowEl = document.getElementById('ai-chat-window');
+        windowEl.classList.remove('hidden');
+        windowEl.classList.add('flex');
+        
+        const inputEl = document.getElementById('ai-chat-input');
+        inputEl.value = promptText;
+        sendAIChatMessage();
+    }
+
+    // Capturar evento Enter en la caja de texto
+    function handleAIChatKey(event) {
+        if (event.key === 'Enter') {
+            sendAIChatMessage();
+        }
+    }
+
+    // Procesar sugerencias rápidas
+    function sendQuickPrompt(promptText) {
+        const inputEl = document.getElementById('ai-chat-input');
+        inputEl.value = promptText;
+        sendAIChatMessage();
+    }
+
+    // Función Principal de Ventas IA
+    async function sendAIChatMessage() {
+        const inputEl = document.getElementById('ai-chat-input');
+        const query = inputEl.value.trim();
+        if (!query) return;
+
+        inputEl.value = '';
+        appendMessage('user', query);
+        const loadingId = appendLoadingIndicator();
+
+        const productsContext = productsDB.map(p => {
+            return `- ${p.name} (ID: ${p.id}): ${p.desc} | Precio: ${p.price} USD.`;
+        }).join('\n');
+
+        const systemPrompt = `Eres el Asistente Inteligente y Experto Solar de "Cachotecnohogar" en Cuba.
+Resuelve dudas de hardware, paneles y pagos.
+CATÁLOGO:
+${productsContext}
+TASA: 1 USD = ${usdToCupRate} CUP.
+REGLAS:
+1. Recomienda productos listados con sus nombres exactos.
+2. Agrega explicaciones cortas y amigables.
+3. Responde en español amigable para el público cubano.`;
+
+        aiChatHistory.push({ role: 'user', parts: [{ text: query }] });
+
+        const payload = {
+            contents: aiChatHistory,
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+        };
+
+        try {
+            const response = await fetchWithBackoff(apiUrlText, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+            removeLoadingIndicator(loadingId);
+
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+                const textResponse = candidate.content.parts[0].text;
+                aiChatHistory.push(candidate.content);
+                appendMessage('ai', textResponse);
+            } else {
+                appendMessage('ai', "Disculpa, he tenido un inconveniente procesando tu solicitud.");
+            }
+        } catch (error) {
+            removeLoadingIndicator(loadingId);
+            appendMessage('ai', "Lo siento, ha ocurrido un error de conexión con mi cerebro artificial.");
+        }
+    }
+
+    // Agregar mensaje al contenedor del chat
+    function appendMessage(sender, text) {
+        const messagesContainer = document.getElementById('ai-messages');
+        const bubbleWrap = document.createElement('div');
+        
+        if (sender === 'user') {
+            bubbleWrap.className = "flex gap-2 items-start justify-end max-w-[85%] ml-auto";
+            bubbleWrap.innerHTML = `
+                <div class="bg-gradient-to-br from-azul-marino to-azul-deep text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-xs leading-relaxed font-medium">
+                    ${escapeHtml(text)}
+                </div>
+            `;
+        } else {
+            bubbleWrap.className = "flex gap-2 items-start max-w-[85%]";
+            const formattedText = parseSimpleMarkdown(text);
+            const recommendedProductsButtons = scanForProducts(text);
+            const msgId = 'msg-' + Date.now();
+
+            bubbleWrap.innerHTML = `
+                <div class="bg-emerald-100 text-emerald-800 p-2 rounded-xl text-[10px] font-black uppercase flex-shrink-0">IA</div>
+                <div class="flex flex-col gap-2 w-full">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 text-xs text-slate-700 leading-relaxed relative group">
+                        <div id="${msgId}-text">${formattedText}</div>
+                        <!-- Botón TTS (Audio) -->
+                        <div class="mt-2 pt-2 border-t border-slate-50 flex justify-end">
+                            <button onclick="playAudioResponse('${msgId}')" id="${msgId}-audio-btn" class="text-emerald-600 hover:text-emerald-800 text-[10px] font-bold flex items-center gap-1 bg-slate-50 hover:bg-emerald-50 px-2.5 py-1 rounded-lg transition-colors border border-slate-100">
+                                <i class="fa-solid fa-volume-high text-xs"></i> <span>Escuchar Consejo</span>
+                            </button>
+                        </div>
+                    </div>
+                    ${recommendedProductsButtons}
+                </div>
+            `;
+        }
+
+        messagesContainer.appendChild(bubbleWrap);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function appendLoadingIndicator() {
+        const messagesContainer = document.getElementById('ai-messages');
+        const loadingId = 'loading-' + Date.now();
+        const bubbleWrap = document.createElement('div');
+        bubbleWrap.id = loadingId;
+        bubbleWrap.className = "flex gap-2 items-start max-w-[85%]";
+        bubbleWrap.innerHTML = `
+            <div class="bg-emerald-100 text-emerald-800 p-2 rounded-xl text-[10px] font-black uppercase">IA</div>
+            <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 text-xs text-slate-400 flex items-center gap-1.5">
+                <span>Analizando</span>
+                <span class="flex gap-0.5">
+                    <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                    <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                    <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                </span>
+            </div>
+        `;
+        messagesContainer.appendChild(bubbleWrap);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        return loadingId;
+    }
+
+    function removeLoadingIndicator(id) {
+        const indicator = document.getElementById(id);
+        if (indicator) indicator.remove();
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function parseSimpleMarkdown(text) {
+        let html = escapeHtml(text);
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\n/g, '<br>');
+        html = html.replace(/(?:^|<br>)\s*[-*]\s+(.*?)(?=<br>|$)/g, '<li class="ml-3 list-disc text-slate-600">$1</li>');
+        return html;
+    }
+
+    function scanForProducts(text) {
+        let buttonsHtml = '';
+        const textLower = text.toLowerCase();
+
+        productsDB.forEach(product => {
+            const productNameLower = product.name.toLowerCase();
+            const wordsToMatch = productNameLower.split(' ').filter(w => w.length > 3);
+            let match = textLower.includes(productNameLower);
+            if (!match && wordsToMatch.length > 0) {
+                let matchesCount = 0;
+                wordsToMatch.forEach(word => {
+                    if (textLower.includes(word)) matchesCount++;
+                });
+                if (matchesCount >= Math.min(wordsToMatch.length, 2)) match = true;
+            }
+
+            if (match) {
+                buttonsHtml += `
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-2 flex items-center justify-between gap-3 text-xs shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <img src="${product.image}" alt="${product.name}" class="w-8 h-8 object-cover rounded-lg">
+                            <div>
+                                <h5 class="font-bold text-[11px] text-azul-marino line-clamp-1">${product.name}</h5>
+                                <p class="text-[10px] text-rojo-oscuro font-bold">${formatPrice(product.price)}</p>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('${product.id}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-2.5 py-1 rounded-lg text-[10px]">
+                            <i class="fa-solid fa-cart-plus"></i> Comprar
+                        </button>
+                    </div>
+                `;
+            }
+        });
+
+        if (buttonsHtml) {
+            return `<div class="flex flex-col gap-1.5 mt-1 border-t border-slate-100 pt-2">${buttonsHtml}</div>`;
+        }
+        return '';
+    }
+</script>
+
+<script>
+    // Conversor PCM-16 signed a WAV Blob
+    function base64ToArrayBuffer(base64) {
+        const binaryString = window.atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
+    function pcmToWav(pcm16, sampleRate) {
+        const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+        const view = new DataView(buffer);
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        writeString(view, 0, 'RIFF');
+        view.setUint32(4, 36 + pcm16.length * 2, true);
+        writeString(view, 8, 'WAVE');
+        writeString(view, 12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true); // Raw PCM
+        view.setUint16(22, 1, true); // 1 Canal (Mono)
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * 2, true);
+        view.setUint16(32, 2, true);
+        view.setUint16(34, 16, true); // 16 bits
+        writeString(view, 36, 'data');
+        view.setUint32(40, pcm16.length * 2, true);
+
+        for (let i = 0; i < pcm16.length; i++) {
+            view.setInt16(44 + i * 2, pcm16[i], true);
+        }
+
+        return new Blob([view], { type: 'audio/wav' });
+    }
+
+    // Reproducir consejos mediante TTS de Gemini
+    async function playAudioResponse(msgId) {
+        const btn = document.getElementById(`${msgId}-audio-btn`);
+        const textElement = document.getElementById(`${msgId}-text`);
+        const rawText = textElement.innerText || textElement.textContent;
+
+        const originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin text-xs"></i> <span>Generando voz...</span>`;
+
+        const cleanText = "Habla de forma alegre y amigable en español cubano: " + rawText.substring(0, 300); // Acortar para garantizar latencia óptima
+
+        const payload = {
+            contents: [{ parts: [{ text: cleanText }] }],
+            generationConfig: {
+                responseModalities: ["AUDIO"],
+                speechConfig: {
+                    voiceConfig: {
+                        prebuiltVoiceConfig: { voiceName: "Aoede" } // Voz balanceada para español
+                    }
+                }
+            }
+        };
+
+        try {
+            const response = await fetchWithBackoff(apiUrlTTS, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            const part = result?.candidates?.[0]?.content?.parts?.[0];
+            const audioData = part?.inlineData?.data;
+            const mimeType = part?.inlineData?.mimeType;
+
+            if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
+
+                const pcmBuffer = base64ToArrayBuffer(audioData);
+                const pcm16 = new Int16Array(pcmBuffer);
+                const wavBlob = pcmToWav(pcm16, sampleRate);
+                const audioUrl = URL.createObjectURL(wavBlob);
+
+                const audio = new Audio(audioUrl);
+                btn.innerHTML = `<i class="fa-solid fa-volume-high text-xs animate-bounce"></i> <span>Reproduciendo...</span>`;
+                
+                audio.play();
+                audio.onended = () => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalHtml;
+                };
+            } else {
+                throw new Error("Formato de audio no devuelto por Gemini TTS.");
+            }
+        } catch (error) {
+            console.error(error);
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-600"></i> <span>Error de voz</span>`;
+            setTimeout(() => { btn.innerHTML = originalHtml; }, 3000);
+        }
+    }
+</script>
+
+<script>
+    // Actualizar etiquetas en vivo de la calculadora
+    function updateSolarFormLabels() {
+        const splitVal = parseInt(document.getElementById('sc-split-hours').value);
+        const fanVal = parseInt(document.getElementById('sc-fan').value);
+        const tvVal = parseInt(document.getElementById('sc-tv').value);
+        const lightsVal = parseInt(document.getElementById('sc-lights').value);
+
+        document.getElementById('sc-split-val').innerText = splitVal > 0 ? `${splitVal} horas/día` : 'Apagado';
+        document.getElementById('sc-fan-val').innerText = `${fanVal} unidades`;
+        document.getElementById('sc-tv-val').innerText = tvVal > 0 ? `${tvVal} horas/día` : 'Apagado';
+        document.getElementById('sc-lights-val').innerText = `${lightsVal} unidades`;
+    }
+
+    // Diseñar e invocar cálculo Solar con Gemini en JSON Estructurado
+    async function calculateSolarSystemIA() {
+        const placeholder = document.getElementById('solar-results-placeholder');
+        const loading = document.getElementById('solar-results-loading');
+        const dashboard = document.getElementById('solar-results-dashboard');
+
+        placeholder.classList.add('hidden');
+        dashboard.classList.add('hidden');
+        loading.classList.remove('hidden');
+
+        // Obtener datos del formulario
+        const splitHours = parseInt(document.getElementById('sc-split-hours').value);
+        const hasFridge = document.getElementById('sc-fridge').checked;
+        const fanQty = parseInt(document.getElementById('sc-fan').value);
+        const tvHours = parseInt(document.getElementById('sc-tv').value);
+        const lightsQty = parseInt(document.getElementById('sc-lights').value);
+
+        const prompt = `Calcula los requerimientos de un sistema solar fotovoltaico para mitigar apagones en Cuba con las siguientes cargas:
+- Split de Aire Acondicionado (1000W): ${splitHours} horas de uso diario.
+- Refrigerador (200W continuos): ${hasFridge ? "Sí" : "No"}.
+- Ventiladores (${fanQty} unidades de 80W): uso promedio de 8 horas diarias cada uno.
+- Televisor LED (120W): ${tvHours} horas de uso diario.
+- Luces LED (${lightsQty} unidades de 15W): uso promedio de 6 horas diarias.
+
+Proporciona los resultados optimizados estrictamente en formato JSON utilizando el esquema suministrado.`;
+
+        const solarSchema = {
+            type: "OBJECT",
+            properties: {
+                "totalDailyConsumpWh": { "type": "NUMBER", "description": "Consumo diario estimado en Watt-hora total." },
+                "recommendedKwp": { "type": "NUMBER", "description": "Capacidad recomendada en kWp para el arreglo fotovoltaico." },
+                "panelsNeeded": { "type": "NUMBER", "description": "Cantidad de paneles solares SkyMax de 600W requeridos." },
+                "batteryCapacityNeededWh": { "type": "NUMBER", "description": "Capacidad de almacenamiento en batería sugerida en Wh." },
+                "recommendedProducts": {
+                    "type": "ARRAY",
+                    "items": { "type": "STRING" },
+                    "description": "Lista de IDs de productos recomendados del catálogo. Elige entre: 'skymax-600', 'ecoflow-delta-pro', 'inversor-deye-5k', 'split-royal-12'."
+                },
+                "technicalExplanation": { "type": "STRING", "description": "Breve explicación técnica sobre por qué se seleccionaron estas capacidades." },
+                "recommendedRoutine": { "type": "STRING", "description": "Recomendaciones específicas de qué apagar o encender durante el día o la noche." }
+            },
+            "required": ["totalDailyConsumpWh", "recommendedKwp", "panelsNeeded", "batteryCapacityNeededWh", "recommendedProducts", "technicalExplanation", "recommendedRoutine"]
+        };
+
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: solarSchema
+            }
+        };
+
+        try {
+            const response = await fetchWithBackoff(apiUrlText, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            const textJson = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            const parsed = JSON.parse(textJson);
+
+            loading.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+
+            // Actualizar datos del Dashboard
+            document.getElementById('sol-card-wh').innerText = `${parsed.totalDailyConsumpWh.toLocaleString()} Wh`;
+            document.getElementById('sol-card-kwp').innerText = `${parsed.recommendedKwp.toFixed(2)} kWp`;
+            document.getElementById('sol-card-panels').innerText = `${parsed.panelsNeeded} U`;
+            document.getElementById('sol-card-battery').innerText = `${parsed.batteryCapacityNeededWh.toLocaleString()} Wh`;
+
+            document.getElementById('sol-explanation-txt').innerText = parsed.technicalExplanation;
+            document.getElementById('sol-routine-txt').innerText = parsed.recommendedRoutine;
+
+            // Renderizar productos recomendados en el dashboard
+            const productsContainer = document.getElementById('solar-recommended-products-container');
+            productsContainer.innerHTML = '';
+
+            parsed.recommendedProducts.forEach(prodId => {
+                const product = productsDB.find(p => p.id === prodId);
+                if (product) {
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-between gap-3 shadow-xs";
+                    card.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <img src="${product.image}" alt="${product.name}" class="w-10 h-10 object-cover rounded-xl">
+                            <div>
+                                <h5 class="font-bold text-xs text-slate-800 line-clamp-1">${product.name}</h5>
+                                <p class="text-[10px] text-teal-600 font-bold">${formatPrice(product.price)}</p>
+                            </div>
+                        </div>
+                        <button onclick="addToCart('${product.id}')" class="bg-teal-600 hover:bg-teal-500 text-white font-bold p-2 rounded-xl text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    `;
+                    productsContainer.appendChild(card);
+                }
+            });
+
+        } catch (error) {
+            console.error(error);
+            loading.classList.add('hidden');
+            placeholder.classList.remove('hidden');
+        }
+    }
+</script>
+
+<script>
+    // Analizar ensamblaje de PC con Gemini en JSON Estructurado
+    async function calculatePCCompatibilityIA() {
+        const placeholder = document.getElementById('pc-results-placeholder');
+        const loading = document.getElementById('pc-results-loading');
+        const dashboard = document.getElementById('pc-results-dashboard');
+
+        placeholder.classList.add('hidden');
+        dashboard.classList.add('hidden');
+        loading.classList.remove('hidden');
+
+        // Obtener datos de la PC elegida
+        const gpuKey = document.getElementById('pc-gpu').value;
+        const cpuKey = document.getElementById('pc-cpu').value;
+        const ramKey = document.getElementById('pc-ram').value;
+        const ssdKey = document.getElementById('pc-ssd').value;
+        const games = document.getElementById('pc-games').value;
+
+        // Mapeo amigable para el prompt
+        const gpuName = gpuKey === 'rx580' ? 'AMD Radeon RX 580 8GB' : (gpuKey === 'rtx3060' ? 'NVIDIA RTX 3060 12GB' : 'NVIDIA RTX 4060 8GB');
+        const cpuName = cpuKey === 'i3-10100f' ? 'Intel i3-10100F' : (cpuKey === 'i5-12400f' ? 'Intel i5-12400F' : 'AMD Ryzen 5 5600X');
+        const ramName = ramKey === 'corsair-16gb' ? '16GB Corsair Vengeance DDR4' : '32GB DDR4';
+        const ssdName = ssdKey === 'kingston-1tb' ? 'SSD NVMe Kingston 1TB' : 'HDD Sata3';
+
+        const prompt = `Analiza la compatibilidad y rendimiento de la siguiente PC para Gaming y Diseño:
+- GPU: ${gpuName}
+- CPU: ${cpuName}
+- RAM: ${ramName}
+- Almacenamiento: ${ssdName}
+- Juegos Objetivo: ${games}
+
+Devuelve el análisis en estricto formato JSON usando el esquema especificado.`;
+
+        const pcSchema = {
+            type: "OBJECT",
+            properties: {
+                "bottleneckPercentage": { "type": "NUMBER", "description": "Porcentaje de cuello de botella estimado de 0 a 100." },
+                "bottleneckComponent": { "type": "STRING", "description": "Nombre del componente limitante." },
+                "compatibilityIssues": {
+                    "type": "ARRAY",
+                    "items": { "type": "STRING" },
+                    "description": "Lista de posibles problemas de compatibilidad (ej: PSU necesaria, Socket de placa, disipador)."
+                },
+                "gamingPerformance": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "game": { "type": "STRING" },
+                            "fps": { "type": "STRING", "description": "FPS estimados (ej: '65-80 FPS')." },
+                            "settings": { "type": "STRING", "description": "Calidad (ej: '1080p Ultra', '1080p Medio')." }
+                        },
+                        "required": ["game", "fps", "settings"]
+                    }
+                },
+                "upgradeSuggestions": {
+                    "type": "ARRAY",
+                    "items": { "type": "STRING" },
+                    "description": "Recomendaciones de actualización disponibles en nuestro catálogo (ej: SSD M.2 NVMe, RAM)."
+                },
+                "verdict": { "type": "STRING", "description": "Resumen técnico global de la PC armada." }
+            },
+            "required": ["bottleneckPercentage", "bottleneckComponent", "compatibilityIssues", "gamingPerformance", "upgradeSuggestions", "verdict"]
+        };
+
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: pcSchema
+            }
+        };
+
+        try {
+            const response = await fetchWithBackoff(apiUrlText, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            const textJson = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            const parsed = JSON.parse(textJson);
+
+            loading.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+
+            // Actualizar interfaz HUD Gamer
+            document.getElementById('pc-hud-bottleneck-pct').innerText = `${parsed.bottleneckPercentage}%`;
+            document.getElementById('pc-hud-bottleneck-comp').innerText = parsed.bottleneckComponent;
+
+            // Renderizar estatus de compatibilidad
+            const compContainer = document.getElementById('pc-hud-compatibility-container');
+            compContainer.innerHTML = '';
+            if (parsed.compatibilityIssues.length === 0) {
+                compContainer.innerHTML = `<span class="text-xs text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Sin problemas de compatibilidad.</span>`;
+            } else {
+                parsed.compatibilityIssues.forEach(issue => {
+                    const li = document.createElement('p');
+                    li.className = "text-xs text-amber-400 flex items-center gap-1";
+                    li.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${issue}`;
+                    compContainer.appendChild(li);
+                });
+            }
+
+            // Renderizar grilla de FPS
+            const fpsGrid = document.getElementById('pc-hud-fps-grid');
+            fpsGrid.innerHTML = '';
+            parsed.gamingPerformance.forEach(game => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-950 border border-slate-800 p-3 rounded-2xl text-center";
+                card.innerHTML = `
+                    <span class="text-[10px] text-slate-400 uppercase font-bold block">${game.game}</span>
+                    <span class="text-lg font-black text-blue-400 block my-1">${game.fps}</span>
+                    <span class="text-[10px] text-slate-500 block">${game.settings}</span>
+                `;
+                fpsGrid.appendChild(card);
+            });
+
+            // Renderizar sugerencias de mejoras
+            const upgradesList = document.getElementById('pc-hud-upgrades-list');
+            upgradesList.innerHTML = '';
+            parsed.upgradeSuggestions.forEach(sugg => {
+                const li = document.createElement('li');
+                li.innerText = sugg;
+                upgradesList.appendChild(li);
+            });
+
+            // Verdict
+            document.getElementById('pc-hud-verdict-txt').innerText = parsed.verdict;
+
+        } catch (error) {
+            console.error(error);
+            loading.classList.add('hidden');
+            placeholder.classList.remove('hidden');
+        }
+    }
+</script>
+</body>
+</html>
