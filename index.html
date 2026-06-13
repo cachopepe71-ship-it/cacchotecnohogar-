@@ -64,8 +64,39 @@
             scrollbar-width: none;
         }
     </style>
+    <style>
+    /* Configuración base para que el fondo se vea bien */
+    body {
+        transition: background 0.8s ease-in-out; /* Esto hace que el cambio sea suave */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Define tus fondos aquí */
+    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.jpg'); }
+    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); }
+    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); }
+    </style>
+    <script>
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const body = document.body;
+
+        // Ajusta los números (300, 800) según qué tan larga sea tu página
+        if (scrollY < 300) {
+            body.className = 'bg-1';
+        } else if (scrollY < 800) {
+            body.className = 'bg-2';
+        } else {
+            body.className = 'bg-3';
+        }
+    });
+    </script>
+    
+    
 </head>
-<body class="text-slate-800 antialiased" style="background-image: url(https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/house-of-the-dragon-series-943%400%40g-phone-4k.jpg); background-size: cover; background-position: center; background-attachment: fixed;">
+<body class="text-slate-800 antialiased">
     
     <script>
     // Listado ampliado y mejorado de productos de Cachotecnohogar
