@@ -74,7 +74,7 @@
     }
 
     /* Define tus fondos aquí */
-    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.jpg'); }
+    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); }
     .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); }
     .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); }
     </style>
@@ -84,9 +84,9 @@
         const body = document.body;
 
         // Ajusta los números (300, 800) según qué tan larga sea tu página
-        if (scrollY < 300) {
+        if (scrollY < 400) {
             body.className = 'bg-1';
-        } else if (scrollY < 800) {
+        } else if (scrollY < 900) {
             body.className = 'bg-2';
         } else {
             body.className = 'bg-3';
