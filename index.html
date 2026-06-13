@@ -64,34 +64,79 @@
             scrollbar-width: none;
         }
     </style>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Página con Cambio de Fondo</title>
+
     <style>
-    /* Configuración base para que el fondo se vea bien */
+        body {
+            transition: background-color 0.8s ease; /* Esto hace que el cambio sea suave */
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        <style>
     body {
-        transition: background 0.8s ease-in-out; /* Esto hace que el cambio sea suave */
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+        transition: background-image 0.8s ease-in-out; /* Ahora la transición es sobre la imagen */
+        background-size: cover;          /* Asegura que la imagen cubra toda la pantalla */
+        background-position: center;     /* Centra la imagen */
+        background-repeat: no-repeat;    /* Evita que la imagen se repita */
+        background-attachment: fixed;    /* Mantiene la imagen fija al hacer scroll */
+        margin: 0;
+        font-family: sans-serif;
     }
 
-    /* Define tus fondos aquí */
-    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); }
-    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); }
-    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); }
-    </style>
-    <script>
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const body = document.body;
+    /* Aquí pones las rutas a tus imágenes */
+    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); color: white; }
+    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); color: black; }
+    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); color: white; }
 
-        // Ajusta los números (300, 800) según qué tan larga sea tu página
-        if (scrollY < 200) {
-            body.className = 'bg-1';
-        } else if (scrollY < 1600) {
-            body.className = 'bg-2';
-        } else if (scrolly <2400)  {
-            body.className = 'bg-3';
-        }
-    });
+    section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+</style>
+    </style>
+</head>
+
+<body class="bg-1"> <section id="seccion1" data-bg="bg-1">
+        <h1>Bienvenido - Sección 1</h1>
+    </section>
+
+    <section id="seccion2" data-bg="bg-2">
+        <h1>Conócenos - Sección 2</h1>
+    </section>
+
+    <section id="seccion3" data-bg="bg-3">
+        <h1>Contacto - Sección 3</h1>
+    </section>
+
+    <script>
+        const secciones = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Limpia las clases anteriores
+                    document.body.classList.remove('bg-1', 'bg-2', 'bg-3');
+                    // Agrega la clase que está en el data-bg de la sección actual
+                    document.body.classList.add(entry.target.dataset.bg);
+                }
+            });
+        }, { threshold: 0.6 });
+
+        secciones.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
+    
+    <style>
+    
     </script>
     
     
