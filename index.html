@@ -48,86 +48,37 @@
         ::-webkit-scrollbar-thumb:hover {
             background: ;
         }
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(178, 34, 34, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(178, 34, 34, 0.3); }
-        }
-        .animate-pulse-glow {
-            animation: pulse-glow 2s infinite;
-        }
-        /* Ocultar barra de scroll para elementos específicos */
-        .scrollbar-none::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-none {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-    <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mi Página con Cambio de Fondo</title>
-
-    <style>
-        body {
-            transition: background-color 0.8s ease; /* Esto hace que el cambio sea suave */
-            margin: 0;
-            font-family: sans-serif;
-        }
-
         <style>
+    /* Configuración base para que el fondo se vea bien */
     body {
-        transition: background-image 0.8s ease-in-out; /* Ahora la transición es sobre la imagen */
-        background-size: cover;          /* Asegura que la imagen cubra toda la pantalla */
-        background-position: center;     /* Centra la imagen */
-        background-repeat: no-repeat;    /* Evita que la imagen se repita */
-        background-attachment: fixed;    /* Mantiene la imagen fija al hacer scroll */
-        margin: 0;
-        font-family: sans-serif;
+        transition: background 0.8s ease-in-out; /* Esto hace que el cambio sea suave */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
 
-    /* Aquí pones las rutas a tus imágenes */
-    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); color: white; }
-    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); color: black; }
-    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); color: white; }
-
-    section {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-    }
+    /* Define tus fondos aquí */
+    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); }
+    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); }
+    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); }
 </style>
-    </style>
-
     <script>
-        const secciones = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const body = document.body;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Limpia las clases anteriores
-                    document.body.classList.remove('bg-1', 'bg-2', 'bg-3');
-                    // Agrega la clase que está en el data-bg de la sección actual
-                    document.body.classList.add(entry.target.dataset.bg);
-                }
-            });
-        }, { threshold: 0.6 });
-
-        secciones.forEach(section => observer.observe(section));
-    </script>
-</body>
-</html>
-    
-    <style>
-    
+        // Ajusta los números (300, 800) según qué tan larga sea tu página
+        if (scrollY < 300) {
+            body.className = 'bg-1';
+        } else if (scrollY < 800) {
+            body.className = 'bg-2';
+        } else {
+            body.className = 'bg-3';
+        }
+    });
     </script>
     
-    
-</head>
+    </head>
 <body class="text-slate-800 antialiased">
     
     <script>
