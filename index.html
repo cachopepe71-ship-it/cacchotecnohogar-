@@ -46,7 +46,7 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: ;
+            background: #001f3f;
         }
         @keyframes pulse-glow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(178, 34, 34, 0.7); }
@@ -65,36 +65,6 @@
         }
     </style>
 </head>
-    <style>
-    /* Configuración base para que el fondo se vea bien */
-    body {
-        transition: background 0.8s ease-in-out; /* Esto hace que el cambio sea suave */
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-
-    /* Define tus fondos aquí */
-    .bg-1 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%201.5.jpg'); }
-    .bg-2 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%202.jpg'); }
-    .bg-3 { background-image: url('https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/fondo%203.jpg'); }
-    </style>
-    <script>
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const body = document.body;
-
-        // Ajusta los números (300, 800) según qué tan larga sea tu página
-        if (scrollY < 1600) {
-            body.className = 'bg-1';
-        } else if (scrollY < 2000) {
-            body.className = 'bg-2';
-        } else {
-            body.className = 'bg-3';
-        }
-    });
-    </script>
-    
 <body class="bg-[#fcfcf9] text-slate-800 antialiased font-sans min-h-screen flex flex-col pb-20 md:pb-0">
 
 <script>
@@ -106,52 +76,11 @@
             category: 'energia',
             desc: 'Panel solar monocristalino de altísima eficiencia y tecnología N-Type. Ideal para sistemas de respaldo residencial y comercial.',
             price: 180,
-            bulkPrice: 'AGOTADO, EN ESPERA DEL PROXIMO LOTE PARA LA SEMANA QUE VIENE',
+            bulkPrice: 'Pallet de 37U: 165 USD c/u',
             hasBulk: true,
             features: ['Tecnología Bifacial / N-Type', 'Garantía de rendimiento', 'Excelente en días nublados'],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/1781306571951.jpg',
-            badge: 'AGOTADO'
-        },
-        {
-            id: 'MUST_6K_10KWH',
-            name: 'Inversor Must 6kW + 2 Baterías Must 5kWh (10kWh Total)',
-            category: 'energia',
-            desc: 'Sistema de energía solar MUST compuesto por un inversor de 6kW de alta eficiencia y dos baterías de litio de 5kWh cada una, ofreciendo una capacidad total de almacenamiento de 10kWh. Solución completa ideal para respaldar el consumo de hogares o negocios.',
-            price: 3350,
-            bulkPrice: '#1 en ventas',
-            hasBulk: true,
-            features: ['nversor solar MUST 6kW',
-                '2 unidades de batería MUST 5kWh (10kWh acumulados)',
-                'Solución energética completa',
-                'Alta eficiencia de conversión',
-                'Diseño compacto y modular',
-                'Monitoreo avanzado de carga'],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/IMG_20260612_203321.jpg',
-            badge: 'ON FIRE'
-        },
-        {
-            id: 'MUST_12K_15KWH',
-            name: 'Inversor Must 12kw + Batería Must 15kwh',
-            category: 'energia',
-            desc: 'Paquete completo de energía solar MUST para hogar o negocio, que incluye un inversor de 12kW y una batería de 15kWh. Potencia, eficiencia y respaldo garantizados.',
-            price: 4450,
-            bulkPrice: '#1 en ventas',
-            hasBulk: true,
-            features: ['Inversor MUST 12K (12000W) Bifásico','Batería MUST 15kWh (15360W, 51.2V 300Ah)','Bifásico','Alta Eficiencia','Energía Confiable','Protección Total','Larga Vida Útil'],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/IMG_20260612_203507.jpg',
-            badge: 'Recomendado'
-        },
-        {
-            id: 'SUN-630',
-            name: 'Panel Solar SUN 600-630W',
-            category: 'energia',
-            desc: 'Panel solar monocristalino de altísima eficiencia y tecnología N-Type. Ideal para sistemas de respaldo residencial y comercial.',
-            price: 180,
-            bulkPrice: 'AGOTADO, EN ESPERA DEL PROXIMO LOTE PARA LA SEMANA QUE VIENE',
-            hasBulk: true,
-            features: ['Tecnología Bifacial / N-Type', 'Garantía de rendimiento', 'Excelente en días nublados'],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/1781289932256.jpg',
-            badge: 'AGOTADO'
+            image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+            badge: 'Más Vendido'
         },
         {
             id: 'ecoflow-delta-pro',
@@ -162,43 +91,20 @@
             bulkPrice: 'Envío gratis a domicilio en La Habana',
             hasBulk: true,
             features: ['Batería LFP (6000+ ciclos)', 'Carga ultra rápida X-Stream', 'Control inteligente vía App'],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/1781283058702.jpg',
+            image: 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=600&q=80',
             badge: 'Premium'
         },
         {
-            id: 'ECOFLOW_DELTA_3_MAX',
-            name: 'EcoFlow Delta 3 Max',
+            id: 'inversor-deye-5k',
+            name: 'Inversor Híbrido Deye 5kW LPV',
             category: 'energia',
-            desc: 'Estación de energía portátil de alta capacidad, ideal para respaldo doméstico y actividades fuera de la red.',
-            price: 1330,
-            bulkPrice: 'Producto nuevo en stock',
+            desc: 'Inversor de onda senoidal pura de última generación con cargador solar MPPT inteligente incorporado.',
+            price: 1250,
+            bulkPrice: 'Garantía técnica de 1 año',
             hasBulk: true,
-            features: [
-                'Factura a nombre del cliente',
-                'Servicio de domicilio incluido',
-                'Alta capacidad de almacenamiento',
-                'Tecnología de carga rápida'
-            ],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/1781327253253.jpg',
-            badge: '☀️'
-        },
-        {
-            id: 'INFINITY_SOLAR_6KW_15KWH',
-            name: 'Kit Todo en 1 Infinity Solar: Inversor 6KW + Batería 15kWh',
-            category: 'energia',
-            desc: 'Sistema de energía solar todo en uno de la marca Infinity Solar. Incluye un inversor de 6KW y una batería de 15kWh, brindando una solución integral de respaldo energético.',
-            price: 3250,
-            bulkPrice: '#1 en ventas',
-            hasBulk: true,
-            features: [
-                'Inversor Infinity Solar 6KW',
-                'Batería de 15kWh',
-                'Factura a nombre del cliente',
-                'Garantía de 6 meses',
-                'Domicilio incluido'
-            ],
-            image: 'https://raw.githubusercontent.com/cachopepe71-ship-it/cacchotecnohogar-/refs/heads/main/1781327804442.jpg',
-            badge: '☀️'
+            features: ['Eficiencia del 97.6%', 'Pantalla táctil LCD color', 'Soporta inyección cero'],
+            image: 'https://images.unsplash.com/photo-1548613053-220efc56865d?auto=format&fit=crop&w=600&q=80',
+            badge: 'Recomendado'
         },
         {
             id: 'rx580-gpu',
@@ -279,7 +185,7 @@
     let currentCategory = 'all';
     let searchQuery = '';
     let selectedCurrency = 'USD'; // Moneda de visualización activa
-    let usdToCupRate = 645;       // Tasa de cambio 
+    let usdToCupRate = 350;       // Tasa de cambio configurable por el usuario en Cuba
     let usdToMlcRate = 1.0;       // Tasa MLC por defecto
     let activeMainTab = 'catalogo'; // catalogo, solar-calc, pc-builder
 </script>
@@ -288,7 +194,7 @@
     <!-- Banner de Información Superior -->
     <div class="bg-rojo-oscuro text-white text-xs py-2 px-4 text-center font-medium flex justify-between items-center max-w-7xl mx-auto">
         <span class="flex items-center gap-1">
-            <i class="fa-solid fa-truck-fast"></i> Entregas garantizadas en toda La Habana
+            <i class="fa-solid fa-truck-fast"></i> Entregas garantizadas en La Habana y provincias cercanas
         </span>
         <span class="hidden md:inline-flex items-center gap-1">
             <i class="fa-solid fa-shield-halved"></i> Equipos certificados con garantía técnica de fábrica
@@ -323,7 +229,7 @@
                 <!-- Botón Configurador de Cambios -->
                 <button onclick="toggleExchangeModal()" class="text-slate-300 hover:text-white p-2 rounded-lg bg-azul-deep border border-slate-700 hover:border-slate-500 transition-all flex items-center gap-2 text-sm">
                     <i class="fa-solid fa-calculator text-rojo-brillante"></i> 
-                    <span class="hidden md:inline">Tasa: 1 USD = <span id="current-rate-lbl">645</span> CUP</span>
+                    <span class="hidden md:inline">Tasa: 1 USD = <span id="current-rate-lbl">350</span> CUP</span>
                 </button>
 
                 <!-- Carrito de Compras (Trigger) -->
@@ -339,7 +245,7 @@
     </div>
 </header>
 
-<section class="relative bg-gradient-to-b from-azul-marino/50 to-azul-deep/50 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+<section class="relative bg-gradient-to-b from-azul-marino to-azul-deep text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <!-- Círculos de Fondo SVG Decorativos -->
     <div class="absolute inset-0 opacity-10">
         <svg class="absolute top-0 right-0 w-96 h-96 -mr-20 -mt-20 text-white" fill="currentColor" viewBox="0 0 100 100">
@@ -421,7 +327,7 @@
         <!-- Título y Control de Filtros -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
             <div class="text-center md:text-left">
-                <h2 class="text-3xl font-red text-white">Catálogo de Productos</h2>
+                <h2 class="text-3xl font-black text-azul-marino">Catálogo de Productos</h2>
                 <p class="text-slate-500 mt-1">Busca y filtra tu equipamiento. Añádelo al carrito para ordenar directo por WhatsApp.</p>
             </div>
             
@@ -811,7 +717,37 @@
 <!-- Beneficios Corporativos -->
 <section class="bg-crema border-y border-crema-dark py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div></div>
+        <!-- Beneficio 1 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-amber-100 text-amber-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-solar-panel text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Especialistas en Energía</h4>
+                <p class="text-slate-600 text-sm">Paneles, baterías de litio y soluciones EcoFlow con asesoramiento profesional por IA y de ingenieros reales.</p>
+            </div>
+        </div>
+        <!-- Beneficio 2 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-red-100 text-red-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-microchip text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Hardware a tu Medida</h4>
+                <p class="text-slate-600 text-sm">Armado de PC personalizadas, memorias, discos rápidos y tarjetas gráficas con total garantía técnica.</p>
+            </div>
+        </div>
+        <!-- Beneficio 3 -->
+        <div class="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="bg-blue-100 text-blue-700 p-3.5 rounded-xl">
+                <i class="fa-solid fa-handshake text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg text-azul-marino mb-1">Múltiples Formas de Pago</h4>
+                <p class="text-slate-600 text-sm">Facilidad absoluta: aceptamos USD, CUP (a tasa acordada), MLC, transferencias y Zelle.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- CART DRAWER WIDGET -->
@@ -897,7 +833,7 @@
 
         <div class="space-y-4">
             <!-- FAQ 1 -->
-            <div class="bg-white/50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
                 <button onclick="toggleFAQ(1)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
                     <span>¿Cómo se realiza el pago y qué monedas aceptan?</span>
                     <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
@@ -908,7 +844,7 @@
             </div>
 
             <!-- FAQ 2 -->
-            <div class="bg-white/50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
                 <button onclick="toggleFAQ(2)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
                     <span>¿Hacen entregas a domicilio y cuál es el costo?</span>
                     <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
@@ -919,7 +855,7 @@
             </div>
 
             <!-- FAQ 3 -->
-            <div class="bg-white/50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
                 <button onclick="toggleFAQ(3)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
                     <span>¿Qué tipo de garantía ofrecen en sus equipos?</span>
                     <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
@@ -930,8 +866,8 @@
             </div>
 
             <!-- FAQ 4 -->
-            <div class="bg-white/50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
-                <button onclick="toggleFAQ(4)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino/50 flex justify-between items-center hover:bg-slate-50/80 transition-colors">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm transition-all">
+                <button onclick="toggleFAQ(4)" class="w-full text-left px-6 py-5 font-bold text-lg text-azul-marino flex justify-between items-center hover:bg-slate-50/80 transition-colors">
                     <span>¿Ofrecen el servicio de instalación de paneles e inversores?</span>
                     <i id="faq-icon-4" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                 </button>
@@ -948,7 +884,7 @@
     <!-- Backdrop -->
     <div onclick="toggleExchangeModal()" class="absolute inset-0 bg-slate-900 bg-opacity-70"></div>
     <!-- Modal Box -->
-    <div class="bg-white/50 rounded-3xl p-6 sm:p-8 max-w-md w-full relative z-10 shadow-2xl border border-slate-100">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative z-10 shadow-2xl border border-slate-100">
         <button onclick="toggleExchangeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg">
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
@@ -966,7 +902,7 @@
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">1 USD equivale a:</label>
                 <div class="relative rounded-xl shadow-sm">
-                    <input type="number" id="cup-rate-input" value="645" min="1" class="w-full pl-4 pr-16 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-rojo-oscuro focus:border-transparent outline-none font-bold text-lg text-slate-800">
+                    <input type="number" id="cup-rate-input" value="350" min="1" class="w-full pl-4 pr-16 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-rojo-oscuro focus:border-transparent outline-none font-bold text-lg text-slate-800">
                     <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 font-bold">
                         CUP
                     </div>
@@ -1391,7 +1327,24 @@
         badge.innerText = totalItemsCount;
 
         if (cart.length === 0) {
-            itemDiv.className = "flex items-center justify-between p-4 mb-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg text-white";
+            cartItemsContainer.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            summary.classList.add('opacity-50', 'pointer-events-none');
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+        summary.classList.remove('opacity-50', 'pointer-events-none');
+        cartItemsContainer.innerHTML = '';
+
+        let subtotalUSD = 0;
+
+        cart.forEach(item => {
+            const itemCost = item.product.price * item.qty;
+            subtotalUSD += itemCost;
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flex items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100";
             itemDiv.innerHTML = `
                 <img src="${item.product.image}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded-xl" onerror="this.src='https://placehold.co/150x150/001f3f/FFFFFF?text=${encodeURIComponent(item.product.name)}'">
                 <div class="flex-grow">
@@ -1985,8 +1938,8 @@ Devuelve el análisis en estricto formato JSON usando el esquema especificado.`;
         const payload = {
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema: pcSchema
+                responseMimeType: "application/json",
+                responseSchema: pcSchema
             }
         };
 
