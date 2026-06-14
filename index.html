@@ -1985,8 +1985,8 @@ Devuelve el análisis en estricto formato JSON usando el esquema especificado.`;
         const payload = {
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: pcSchema
+            responseMimeType: "application/json",
+            responseSchema: pcSchema
             }
         };
 
