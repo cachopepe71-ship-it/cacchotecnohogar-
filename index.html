@@ -1391,24 +1391,7 @@
         badge.innerText = totalItemsCount;
 
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '';
-            emptyState.classList.remove('hidden');
-            summary.classList.add('opacity-50', 'pointer-events-none');
-            return;
-        }
-
-        emptyState.classList.add('hidden');
-        summary.classList.remove('opacity-50', 'pointer-events-none');
-        cartItemsContainer.innerHTML = '';
-
-        let subtotalUSD = 0;
-
-        cart.forEach(item => {
-            const itemCost = item.product.price * item.qty;
-            subtotalUSD += itemCost;
-
-            const itemDiv = document.createElement('div');
-            itemDiv.className = "flex items-center justify-between p-4 mb-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg text-white";
+            itemDiv.className = "flex items-center justify-between gap-4 bg-white/50 p-4 rounded-2xl border border-slate-100";
             itemDiv.innerHTML = `
                 <img src="${item.product.image}" alt="${item.product.name}" class="w-16 h-16 object-cover rounded-xl" onerror="this.src='https://placehold.co/150x150/001f3f/FFFFFF?text=${encodeURIComponent(item.product.name)}'">
                 <div class="flex-grow">
